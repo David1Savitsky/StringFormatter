@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Application.Exception;
+﻿using Application.Exception;
 using Application.Interface;
 
 namespace Application.Service;
@@ -76,6 +75,9 @@ public class StringFormatterService : IStringFormatter
         }
         if (template[index] == '{') _validationCheck++;
         if (template[index] == '}') _validationCheck--;
+
+        if (template.Length == index + 1 && _validationCheck != 0) return false;
+        
         return true;
     }
     
