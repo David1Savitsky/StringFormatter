@@ -31,7 +31,7 @@ public class Tests
     {
         string expectedResult = "Привет, Петя Иванов!";
         
-        string actualResult = StringFormatterService.Shared.Format("Привет, {FirstName} {LastName}!", _user);
+        string actualResult = StringFormatterService.Shared.Format("Привет, {firstName} {LastName}!", _user);
         
         Assert.AreEqual(expectedResult, actualResult);
     }
@@ -39,9 +39,9 @@ public class Tests
     [Test]
     public void ScreeningTest()
     {
-        string expectedResult = "Привет, {FirstName}";
+        string expectedResult = "Привет, {firstName}";
 
-        string actualResult = StringFormatterService.Shared.Format("Привет, {{FirstName}}", _user);
+        string actualResult = StringFormatterService.Shared.Format("Привет, {{firstName}}", _user);
         
         Assert.AreEqual(expectedResult, actualResult);
     }
@@ -49,7 +49,7 @@ public class Tests
     [Test]
     public void UnopenBracketTest()
     {
-        Assert.That(() => StringFormatterService.Shared.Format("Привет, {FirstName}}", _user),
+        Assert.That(() => StringFormatterService.Shared.Format("Привет, {firstName}}", _user),
             Throws.TypeOf<InvalidInputException>()
                 .With.Message.EqualTo("Symbol on 9 position is unavailable"));
     }
@@ -57,7 +57,7 @@ public class Tests
     [Test]
     public void UnclosedBracketTest()
     {
-        Assert.That(() => StringFormatterService.Shared.Format("Привет, {{FirstName}", _user),
+        Assert.That(() => StringFormatterService.Shared.Format("Привет, {{firstName}", _user),
             Throws.TypeOf<InvalidInputException>()
                 .With.Message.EqualTo("Symbol on 19 position is unavailable"));
     }
